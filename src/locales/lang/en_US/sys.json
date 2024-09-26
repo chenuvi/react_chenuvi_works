@@ -83,6 +83,7 @@
       "closeRight": "Close Right"
     },
     "menu": {
+      "babylonJs": "BabylonJs",
       "dashboard": "Dashboard",
       "workbench": "Workbench",
       "analysis": "Analysis",

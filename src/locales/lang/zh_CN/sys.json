@@ -82,6 +82,7 @@
       "closeRight": "关闭右侧标签页"
     },
     "menu": {
+      "babylonJs": "BabylonJs",
       "dashboard": "仪表",
       "workbench": "工作台",
       "analysis": "分析",

@@ -8,6 +8,8 @@ import { useUserPermission } from '@/store/userStore';
 import ProTag from '@/theme/antd/components/tag';
 import { flattenTrees } from '@/utils/tree';
 
+import { getRoutesFromModules } from '../utils';
+
 import { Permission } from '#/entity';
 import { BasicStatus, PermissionType } from '#/enum';
 import { AppRouteObject } from '#/router';
@@ -33,12 +35,11 @@ function resolveComponent(path: string) {
  */
 export function usePermissionRoutes() {
   // 切换回静态路由
-  // return useMemo(() => {
-  //   return getRoutesFromModules();
-  // }, []);
+  return useMemo(() => {
+    return getRoutesFromModules();
+  }, []);
 
   const permissions = useUserPermission();
-
   return useMemo(() => {
     const flattenedPermissions = flattenTrees(permissions!);
     const permissionRoutes = transformPermissionToMenuRoutes(
