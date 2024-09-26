@@ -1,18 +1,24 @@
-import { Suspense, lazy } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Typography } from 'antd';
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 
+// import { SvgIcon } from '@/components/icon';
 import { Iconify } from '@/components/icon';
 import { CircleLoading } from '@/components/loading';
 
 import { AppRouteObject } from '#/router';
 
-const AnimatePage = lazy(() => import('@/pages/components/animate'));
-const ScrollPage = lazy(() => import('@/pages/components/scroll'));
-const IconPage = lazy(() => import('@/pages/components/icon'));
+function MenuLevel({ title }: { title: string }) {
+  return <Typography.Title>Menu Level: {title}</Typography.Title>;
+}
 
-const components: AppRouteObject = {
-  order: 3,
-  path: 'components',
+function Wrapper({ children }: any) {
+  return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
+}
+
+const menulevel: AppRouteObject = {
+  order: 2,
+  path: 'babylon',
   element: (
     <Suspense fallback={<CircleLoading />}>
       <Outlet />
@@ -25,25 +31,53 @@ const components: AppRouteObject = {
   },
   children: [
     {
-      index: true,
-      element: <Navigate to="icon2" replace />,
-    },
-    {
-      path: 'icon2',
-      element: <IconPage />,
-      meta: { label: 'sys.menu.icon', key: '/components/icon2' },
-    },
-    {
-      path: 'animate2',
-      element: <AnimatePage />,
-      meta: { label: 'sys.menu.animate', key: '/components/animate2' },
-    },
-    {
-      path: 'scroll2',
-      element: <ScrollPage />,
-      meta: { label: 'sys.menu.scroll', key: '/components/scroll2' },
+      path: 'start',
+      meta: { label: 'sys.menu.system.organization', key: '/babylon/start' },
+      children: [
+        // {
+        //   index: true,
+        //   element: <Navigate to="demo_1" replace />,
+        // },
+        {
+          path: 'demo_1',
+          element: (
+            <Wrapper>
+              <MenuLevel title="3b" />
+            </Wrapper>
+          ),
+          meta: {
+            label: 'sys.menu.menulevel.1b.2a',
+            key: '/babylon/start/demo_1',
+          },
+        },
+        //   {
+        //     path: 'menu_level_2b',
+        //     meta: {
+        //       label: 'sys.menu.menulevel.1b.2b.index',
+        //       key: '/babylon.js/start_journey/demo_2',
+        //     },
+        //     //   children: [
+        //     //     {
+        //     //       path: 'menu_level_3a',
+        //     //       element: <MenuLevel title="3a" />,
+        //     //       meta: {
+        //     //         label: 'sys.menu.menulevel.1b.2b.3a',
+        //     //         key: '/menu_level/menu_level_1b/menu_level_2b/menu_level_3a',
+        //     //       },
+        //     //     },
+        //     //     {
+        //     //       path: 'menu_level_3b',
+        //     //       element: <MenuLevel title="3b" />,
+        //     //       meta: {
+        //     //         label: 'sys.menu.menulevel.1b.2b.3b',
+        //     //         key: '/menu_level/menu_level_1b/menu_level_2b/menu_level_3b',
+        //     //       },
+        //     //     },
+        //     //   ],
+        //   },
+      ],
     },
   ],
 };
 
-export default components;
+export default menulevel;
